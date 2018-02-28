@@ -73,41 +73,6 @@ public class MixedNumber implements MixedNumberInterface, Comparable<MixedNumber
 
 	// Methods:
 
-	private void setSign()
-	{
-		//Fraction f = new Fraction(integer, 1);
-		//this.sign = f.getSign();
-		
-		
-		if ((integer > 0) && fraction.getSign() == '+')
-			this.sign = '+';
-		else if((integer < 0) && fraction.getSign() == '-'){
-			this.sign = '+';
-			fraction.setSign('+');
-		}
-		else if ((integer == 0) && fraction.getSign() == '-'){
-			this.sign = '-';
-			this.fraction.setSign('+');
-		}
-		else if ((integer == 0) && fraction.getSign() == '+'){
-			this.sign = '+';
-		}
-
-		else if((integer > 0) && fraction.getSign() == '-'){
-			this.sign = '-';
-			this.fraction.setSign('+');
-			this.integer = -1 * this.integer;
-		}
-		else if((integer < 0) && fraction.getSign() == '+'){
-			this.sign = '-';
-			//this.integer = -1 * this.integer;
-		}
-		
-	}	
-	private char getSign()
-	{
-		return this.sign;
-	}
 	
 	public MixedNumber()
 	{
@@ -117,7 +82,6 @@ public class MixedNumber implements MixedNumberInterface, Comparable<MixedNumber
 	public MixedNumber(int integerPart, int fractionNumerator, 
 				int fractionDenominator)
 	{
-				
                 setMixedNumber(integerPart, fractionNumerator, fractionDenominator);
 	}	// end constructor
 
@@ -129,19 +93,12 @@ public class MixedNumber implements MixedNumberInterface, Comparable<MixedNumber
 
 	public void setMixedNumber(int integerPart, FractionInterface fractionPart)
 	{	
-		this.integer = integerPart;
-		
+		this.integer = integerPart;	
 		this.fraction = fractionPart;
 		if(fractionPart != null){
 			this.reduceToLowestForm();
 			this.setSign();
-		}
-		//System.out.println("Mixed Number set. Integer - " + String.valueOf(this.integer)+ ". Fraction - " + fraction.toString());
-		
-		// add statements
-		// set this object to the given values
-		// make sure to reduce to lowest term 
-		// check for exception cases
+		}	
 	}	// end setMixedNumber
 
 	
@@ -149,37 +106,22 @@ public class MixedNumber implements MixedNumberInterface, Comparable<MixedNumber
 	public void setMixedNumber(int integerPart, 
 		int fractionNumerator, int fractionDenominator)
 	{
-
-		this.integer = integerPart;
-		
-		
-		
+		this.integer = integerPart;	
 		Fraction f = new Fraction();
 		f.setFraction(fractionNumerator, fractionDenominator);
 		this.setMixedNumber(integerPart, f);
-		//this.reduceToLowestForm();
-		// add statements
-		// set this object to the given values
-		// make sure to reduce to lowest term 
-		// check for exception cases
 	}	// end setMixedNumber
 
 	public int getIntegerPart()
-	{
-		// add statements
-		// retrieve integer portion wth the correct sign
+	{	
 		if(this.integer < 0)
-			//this.integer = -1*this.integer;
 			this.sign = '-';
 		
-		return this.integer;
-		//return this.getIntegerPart();
-		//return 0;  // change this
+		return this.integer;	
 	}	// end getInteger
 
 	public FractionInterface getFractionPart()
 	{
-		// retrieve fraction portion, assume + value
 		return fraction;
 	}	// end getFraction
 
@@ -190,14 +132,8 @@ public class MixedNumber implements MixedNumberInterface, Comparable<MixedNumber
 		Fraction f2 = (Fraction)m1.getFractionalEquivalent();
 		Fraction fractionResult = (Fraction) f1.add(f2);
 		MixedNumber mixResult = new MixedNumber(0,fractionResult);
-		//mixResult.reduceToLowestForm();
 		return mixResult;
-				// add statements
-		// convert MixedNumber object to Fraction object
-		// Use Fraction's add() method to obtain Fraction result
-		// convert result to a new lowest term MixedNumber object
-		// hint: return new MixedNumber(0,result);
-		//return null; // change it
+			
 	} // end add
 
 	public MixedNumberInterface subtract(MixedNumberInterface operand)
@@ -207,15 +143,7 @@ public class MixedNumber implements MixedNumberInterface, Comparable<MixedNumber
 		Fraction f2 = (Fraction)m1.getFractionalEquivalent();
 		Fraction fractionResult = (Fraction) f1.subtract(f2);
 		MixedNumber mixResult = new MixedNumber(0,fractionResult);
-		//mixResult.reduceToLowestForm();
 		return mixResult;
-
-		// add statements
-		// convert MixedNumber object to Fraction object
-		// Use Fraction's substract() method to obtain Fraction result
-		// convert result to a new lowest term MixedNumber object
-		// hint: return new MixedNumber(0,result);
-		//return null; // change it
 	}	// end subtract
 
 	public MixedNumberInterface multiply(MixedNumberInterface multiplier)
@@ -225,15 +153,7 @@ public class MixedNumber implements MixedNumberInterface, Comparable<MixedNumber
 		Fraction f2 = (Fraction)m1.getFractionalEquivalent();
 		Fraction fractionResult = (Fraction) f1.multiply(f2);
 		MixedNumber mixResult = new MixedNumber(0,fractionResult);
-		//mixResult.reduceToLowestForm();
 		return mixResult;
-
-		// add statements
-		// convert MixedNumber object to Fraction object
-		// Use Fraction's multiply() method to obtain Fraction result
-		// convert result to a new lowest term MixedNumber object
-		// hint: return new MixedNumber(0,result);
-		//return null; // change it
 	}	// end multiply
 
 	public MixedNumberInterface divide(MixedNumberInterface divisor)
@@ -241,19 +161,9 @@ public class MixedNumber implements MixedNumberInterface, Comparable<MixedNumber
 		Fraction f1 = (Fraction)this.getFractionalEquivalent();
 		MixedNumber m1 = (MixedNumber)divisor;
 		Fraction f2 = (Fraction)m1.getFractionalEquivalent();
-		Fraction fractionResult = (Fraction) f1.divide(f2);
-		
-			MixedNumber mixResult = new MixedNumber(0,fractionResult);
-			//mixResult.reduceToLowestForm();
+		Fraction fractionResult = (Fraction) f1.divide(f2);		
+		MixedNumber mixResult = new MixedNumber(0,fractionResult);
 		return mixResult;
-
-		// add statements
-		// convert MixedNumber object to Fraction object
-		// Use Fraction's divide() method to obtain Fraction result
-		// convert result to a new lowest term MixedNumber object
-		// hint: return new MixedNumber(0,result);
-		// check for exception cases
-		//return null; // change it
 	}	// end divide
 
 
@@ -263,14 +173,7 @@ public class MixedNumber implements MixedNumberInterface, Comparable<MixedNumber
 		MixedNumber m1 = (MixedNumber)other;
 		Fraction f2 = (Fraction)m1.getFractionalEquivalent();
 		boolean isEqual = f1.equals(f2);
-		//mixResult.reduceToLowestForm();
 		return isEqual;
-
-		// add statements
-		// possible solution:
-                // convert MixedNumber objects to Fraction objects
-		// Use Fraction's equals() method to obtain boolean result
-		//return false; // change it
 	} // end equals
 
 
@@ -279,81 +182,37 @@ public class MixedNumber implements MixedNumberInterface, Comparable<MixedNumber
 		Fraction f1 = (Fraction)this.getFractionalEquivalent();
 		MixedNumber m1 = (MixedNumber)other;
 		Fraction f2 = (Fraction)m1.getFractionalEquivalent();
-		Fraction fractionResult = (Fraction) f1.subtract(f2);
-		
 		int compareResult = f1.compareTo(f2);
-		return compareResult;
-		//MixedNumber mixResult = new MixedNumber(0,fractionResult);
-		//mixResult.reduceToLowestForm();
-		
-		//return mixResult;
-
-		// add statements
-		// possible solution:
-                // convert MixedNumber objects to Fraction objects
-		// Use Fraction's compareTo() method to obtain result
-		//return 0; // change it
+		return compareResult;	
 	} // end compareTo
 
 	
 	public String toString()
 	{
 		if(this.fraction != null){
-			
 			if(this.integer != 0){
-				if(this.sign == '-')
+				if(this.sign == '-'){
 					return String.valueOf(this.sign) + Math.abs(this.integer) + " " + Math.abs(this.fraction.getNumerator()) + "/" + Math.abs(this.fraction.getDenominator());
-				else
+				}else{
 					return Math.abs(this.integer) + " " + Math.abs(this.fraction.getNumerator()) + "/" + Math.abs(this.fraction.getDenominator());
-					
+				}	
 			}else{
-				if(this.sign == '-')
+				if(this.sign == '-'){
 					return String.valueOf(this.sign) + Math.abs(this.fraction.getNumerator()) + "/" + Math.abs(this.fraction.getDenominator());
-				else
-					return Math.abs(this.fraction.getNumerator()) + "/" + Math.abs(this.fraction.getDenominator());
-				
+				}else{
+					return Math.abs(this.fraction.getNumerator()) + "/" + Math.abs(this.fraction.getDenominator());				
+			
+				}
 			}
 		}else{
 			return "";
 		}
 	}
 	
-	/*
-	 * good
-	 * (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-
-	public String toString2()
-	{
-		if(this.fraction != null){
-//			return  String.valueOf(this.integer) + " " + this.fraction.toString();
-			
-			if(this.integer < 0)
-			{
-				return String.valueOf(this.integer) + " " + this.fraction.toString();
-			}else if(this.integer > 0){
-				return String.valueOf(this.integer) + " " + this.fraction.toString();
-			}else{
-				return this.fraction.toString();
-			}
-		}
-			else{
-				return "";
-			}
-		// possible solution:
-		// together with sign, integer and Fraction's toString() method 
-                // to obtain string value
-		// add statements
-		//return null; // change it
-	} // end toString
-
-
 	// Private method: reduce a MixedNumber object to lowest term 
         // E.g. -3 50/7 --> -10 1/7;  3 25/10 --> 5 1/2
 	private void reduceToLowestForm()
 	{
-		// add statements
 		if(fraction == null)
 			return;
 		else{
@@ -372,8 +231,6 @@ public class MixedNumber implements MixedNumberInterface, Comparable<MixedNumber
 		}
 		
 	}	
-
-
 	// Private method: convert a MixedNumber to new Fraction object
         // object. E.g. -7 1/7 --> -50/7;  3 1/8 --> 25/8
 	private FractionInterface getFractionalEquivalent()
@@ -383,10 +240,41 @@ public class MixedNumber implements MixedNumberInterface, Comparable<MixedNumber
 		Fraction f = new Fraction(num,this.fraction.getDenominator()); 
 		f.setSign(this.getSign());
 		return f;
-		// add statements
-		//return null; // changeit
 	}	
 
+	private void setSign()
+	{
+		if ((integer > 0) && fraction.getSign() == '+')
+			this.sign = '+';
+
+		else if((integer < 0) && fraction.getSign() == '-'){
+			this.sign = '+';
+			fraction.setSign('+');
+		}
+		
+		else if ((integer == 0) && fraction.getSign() == '-'){
+			this.sign = '-';
+			this.fraction.setSign('+');
+		}
+		
+		else if ((integer == 0) && fraction.getSign() == '+'){
+			this.sign = '+';
+		}
+
+		else if((integer > 0) && fraction.getSign() == '-'){
+			this.sign = '-';
+			this.fraction.setSign('+');
+			this.integer = -1 * this.integer;
+		}
+		
+		else if((integer < 0) && fraction.getSign() == '+'){
+			this.sign = '-';
+		}
+	}	
+	private char getSign()
+	{
+		return this.sign;
+	}
 	// You may add more private methods
 } // end MixedNumber
 
